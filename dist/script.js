@@ -955,22 +955,32 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modals = function modals() {
+  var btnPressed; // это означает let btnPressed = false (или undefined)
+
   function bindModal(triggerSelector, modalSelector, closeSelector) {
-    var closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+    var destroy = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     // привязка модального окна
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
         windows = document.querySelectorAll('[data-modal]'),
-        scroll = calcScroll();
+        // все модальные окна
+    scroll = calcScroll();
     trigger.forEach(function (item) {
       item.addEventListener('click', function (event) {
         if (event.target) {
           event.preventDefault(); // отключаем перезагрузку стараницы (стандартное событие браузера)
         }
 
+        btnPressed = true; // Означает пользователь нажал на кнопку
+
+        if (destroy) {
+          item.remove();
+        }
+
         windows.forEach(function (item) {
           item.style.display = 'none';
+          item.classList.add('animated', 'fadeIn');
         });
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -986,7 +996,7 @@ var modals = function modals() {
       document.body.style.marginRight = "0px";
     });
     modal.addEventListener('click', function (event) {
-      if (event.target === modal && closeClickOverlay) {
+      if (event.target === modal) {
         windows.forEach(function (item) {
           item.style.display = 'none';
         });
@@ -1009,7 +1019,8 @@ var modals = function modals() {
       if (!display) {
         document.querySelector(selector).style.display = 'block';
         document.body.style.overflow = 'hidden';
-        document.body.style.marginRight = "0px";
+        var scroll = calcScroll();
+        document.body.style.marginRight = "".concat(scroll, "px");
       }
     }, time);
   }
@@ -1026,9 +1037,27 @@ var modals = function modals() {
     return scrollWidth;
   }
 
+  function openByScroll(selector) {
+    window.addEventListener('scroll', function () {
+      //let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      // scrollHeight -> Нужна для того чтобы сработало в старых браузерах
+      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight
+      /*или ставим эту переменную scrollHeight */
+      ) {
+        document.querySelector(selector).click();
+      } // window.pageYOffset -> сколько пользователь отлистал сверху
+      // document.documentElement.clientHeight -> контент виден пользователю
+      // document.documentElement.scrollHeight -> польная высота страницы
+      // .click() -> означает как будто мы кликнули по элементу
+
+    });
+  }
+
   bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
   bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
-  showModalByTime('.popup-consultation', 60000);
+  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true); // при открытии модального окна подарок исчезает(третья функция) 
+
+  openByScroll('.fixed-gift'); //showModalByTime('.popup-consultation', 60000);
 };
 
 
