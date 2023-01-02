@@ -27,6 +27,20 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.fadeSlides {
+  animation-name: fadeSlides;
+  animation-duration: 1s;
+}
+
+@keyframes fadeSlides {
+  from {
+    opacity: 0.1;
+  }
+  to {
+    opacity: 1;
+  }
+}
 * {
   box-sizing: border-box;
   outline: none;
