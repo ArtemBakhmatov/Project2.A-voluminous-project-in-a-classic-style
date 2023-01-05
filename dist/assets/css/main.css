@@ -931,10 +931,21 @@ h4 {
   border-bottom: 2px dotted #333;
 }
 .often-questions .accordion-block {
-  display: none;
-  margin-top: 1rem;
+  /* display: none; */            /* Аккаредеон для первого решения */
+  /* margin-top: 1rem; */         /* Аккаредеон для первого решения */
   background-color: #f7e7e6;
+  /* padding: 3rem 4rem; */       /* Аккаредеон для первого решения */
+  max-height: 0;                  /* Аккаредеон для второго решения */
+  opacity: 0;                     /* Аккаредеон для второго решения */
+  transition: all 0.3s ease-out;  /* Аккаредеон для второго решения */
+  overflow: hidden;               /* Аккаредеон для второго решения */
+}
+
+.often-questions .accordion-block.active-content {  /* Аккаредеон для второго решения */
+  overflow: visible;
+  opacity: 1;
   padding: 3rem 4rem;
+  margin-top: 1rem;
 }
 .often-questions .accordion-block:before {
   content: '';
