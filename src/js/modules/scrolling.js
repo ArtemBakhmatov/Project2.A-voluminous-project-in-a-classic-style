@@ -13,12 +13,12 @@ const scrolling = (upSelector) => {
 
     // прокрутка js через requestAnimationFrame
 
-    let links = document.querySelectorAll('[href^="#"]'),
-        speed = 0.3;
+    let links = document.querySelectorAll('[href^="#"]'),  // все ссылки
+        speed = 0.3;                                       // скорость
     
-    links.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
+    links.forEach(link => { // перебираем все ссылки
+        link.addEventListener('click', function(event) { // клик на ссылку
+            event.preventDefault();   // без перезагрузки страницы
 
             let widthTop = document.documentElement.scrollTop,
                 hash = this.hash,
