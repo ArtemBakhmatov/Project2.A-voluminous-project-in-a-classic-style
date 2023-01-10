@@ -1333,6 +1333,15 @@ h4 {
   .main .file_upload > button {
     width: 100%;
   }
+  .main-slider-item {
+    width: 500px;
+  }
+  .main-slider-item > img {
+    width: 100%;
+  }
+  .promo-2 img {
+    right: 0rem;
+  }
 }
 @media (max-width: 1199px) {
   .fixed-gift {
@@ -1537,6 +1546,12 @@ h4 {
     margin: 4rem auto;
     width: auto;
   }
+  .feedback-block {
+    width: 300px;
+  }
+  .feedback-block > img {
+    width: 100%;
+  }
 }
 @media (max-width: 767px) {
   .main-features {
@@ -1618,6 +1633,12 @@ h4 {
   }
   .footer p {
     text-align: center;
+  }
+  .feedback-block {
+    margin: 0 auto;
+  }
+  .feedback {
+    padding: 0rem 0rem 18rem 0rem;
   }
 }
 @media (max-width: 577px) {
@@ -1736,7 +1757,7 @@ h4 {
     padding: 5rem 0;
   }
   .feedback {
-    padding: 5rem 0;
+    padding: 0rem 0rem 25rem 0rem;
   }
   .feedback .main-next-btn {
     right: -1rem;
@@ -1776,5 +1797,12 @@ h4 {
   .popup-content {
     padding: 3rem 3rem;
     width: 25rem;
+  }
+  .main-slider-item {
+    width: 290px;
+    margin: 0 auto;
+  }
+  .feedback-block {
+    width: 255px;
   }
 }
